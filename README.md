@@ -1,0 +1,2 @@
+# bunnymind
+Make AI easier

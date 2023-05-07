@@ -15,12 +15,23 @@ export function PromptForm() {
     event.preventDefault();
     setLoading(true);
     setResult("");
-    setPrompt("");
     fetch(`/api/bunny?prompt=${encodeURI(prompt)}`)
       .then((res) => res.json())
       .then(({ result }) => {
         console.log(result);
-        setResult(result.choices[0].message.content.replace(/\n/g, "<br>"));
+        setResult(
+          `
+          <div class="card">
+            <div class="card-header">
+              prompt: ${prompt}
+            </div>
+            <div class="card-body">
+              ${result.choices[0].message.content.replace(/\n/g, "<br />")}
+            </div>
+          </div>          
+          `
+        );
+        setPrompt("");
         setLoading(false);
       })
       .catch((e) => console.log(e));
@@ -50,7 +61,7 @@ export function PromptForm() {
           <LoadingSkeleton />
         </div>
       ) : null}
-      <p>{result}</p>
+      <p dangerouslySetInnerHTML={{ __html: result }}></p>
     </div>
   );
 }

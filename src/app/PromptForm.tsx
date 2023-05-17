@@ -5,6 +5,7 @@ import { LoadingSkeleton } from "./LoadingSkeleton";
 
 export function PromptForm() {
   const [prompt, setPrompt] = useState("");
+  const [temperature, setTemperature] = useState(0.6);
   const [result, setResult] = useState("");
   const [loading, setLoading] = useState(false);
   const inputRef = useRef<null | HTMLInputElement>(null);
@@ -53,6 +54,26 @@ export function PromptForm() {
             id="prompt"
           />
           <label htmlFor="prompt">What do you want to ask?</label>
+        </div>
+        <div className="form-floating mb-3">
+          <input
+            className="form-control"
+            value={temperature}
+            onChange={(e: React.FormEvent<HTMLInputElement>) => {
+              setTemperature(parseFloat(e.currentTarget.value));
+            }}
+            placeholder="Temperature"
+            step={0.1}
+            min={0.1}
+            max={1}
+            type="number"
+            name="temperature"
+            id="temperature"
+          />
+          <label htmlFor="temperature">Temperature</label>
+        </div>
+        <div className="form-floating mb-3">
+          <input className="btn btn-primary" value="Submit" type="submit" />
         </div>
       </form>
 

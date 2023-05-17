@@ -17,6 +17,7 @@ export async function GET(request: Request) {
 
   const { searchParams } = new URL(request.url);
   const prompt = searchParams.get("prompt");
+  const temperature = searchParams.get("temperature");
   if (prompt === null || prompt.trim().length === 0) {
     return NextResponse.error();
   }
@@ -29,7 +30,7 @@ export async function GET(request: Request) {
         content: prompt,
       },
     ],
-    temperature: 0.6,
+    temperature: parseFloat(temperature ?? "0.6"),
   });
   return NextResponse.json({ result: completion.data });
 }

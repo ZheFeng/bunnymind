@@ -2,6 +2,8 @@
 
 Make AI easier!
 
+![Bunny](/public/bunny.png "Bunny")
+
 ## Available Scripts
 
 In the project directory, you can run:

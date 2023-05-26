@@ -11,7 +11,7 @@ async function chatgpt(prompt: string, temperature: number): Promise<string> {
 
 function App() {
   const [prompt, setPrompt] = useState("");
-  const [temperature, setTemperature] = useState(0.6);
+  const [temperature] = useState(0.6);
   const [fetching, setFetching] = useState(false);
   const [answer, setAnswer] = useState("");
 
@@ -54,7 +54,16 @@ function App() {
             </div>
           </div>
         ) : null}
-        {answer ? <div>{answer}</div> : null}
+        {answer ? (
+          <div className="card">
+            <div className="card-header">prompt: {prompt}</div>
+            <div className="card-body">
+              {answer.split(/\n/g).map((a) => {
+                return <p>{a}</p>;
+              })}
+            </div>
+          </div>
+        ) : null}
       </div>
     </main>
   );

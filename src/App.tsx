@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import "./App.css";
 
 async function chatgpt(prompt: string, temperature: number): Promise<string> {
@@ -11,9 +11,14 @@ async function chatgpt(prompt: string, temperature: number): Promise<string> {
 
 function App() {
   const [prompt, setPrompt] = useState("");
+  const [lastPrompt, setLastPrompt] = useState("");
   const [temperature] = useState(0.6);
   const [fetching, setFetching] = useState(false);
   const [answer, setAnswer] = useState("");
+  const inputRef = useRef<null | HTMLInputElement>(null);
+  useEffect(() => {
+    inputRef?.current?.focus();
+  }, []);
 
   const onSubmit = (event: React.FormEvent) => {
     event.preventDefault();
@@ -22,6 +27,7 @@ function App() {
     chatgpt(prompt, temperature)
       .then((answer) => {
         setAnswer(answer);
+        setLastPrompt(prompt);
         setPrompt("");
         setFetching(false);
       })
@@ -34,7 +40,9 @@ function App() {
         <form onSubmit={onSubmit} className="mb-5">
           <div className="form-floating mb-3">
             <input
+              ref={inputRef}
               className="form-control"
+              value={prompt}
               onChange={(e: React.FormEvent<HTMLInputElement>) => {
                 setPrompt(e.currentTarget.value);
               }}
@@ -56,11 +64,14 @@ function App() {
         ) : null}
         {answer ? (
           <div className="card">
-            <div className="card-header">prompt: {prompt}</div>
+            <div className="card-header">prompt: {lastPrompt}</div>
             <div className="card-body">
-              {answer.split(/\n/g).map((a) => {
-                return <p>{a}</p>;
-              })}
+              {answer
+                .split(/\n/g)
+                .filter((a) => a)
+                .map((a) => {
+                  return <p>{a}</p>;
+                })}
             </div>
           </div>
         ) : null}

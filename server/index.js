@@ -1,13 +1,22 @@
+require("dotenv").config();
 const express = require("express");
-const dotenv = require("dotenv");
-
-dotenv.config();
+const { send } = require("./chatgpt");
 
 const app = express();
-const port = process.env.PORT ?? 3000;
+const port = process.env.PORT ?? 3001;
 
-app.get("/", (req, res) => {
-  res.send("Express + TypeScript Server");
+app.get("/", async (req, res) => {
+  res.send("Bunnymind API");
+});
+
+app.get("/api/chatgpt", async (req, res, next) => {
+  try {
+    const { prompt, temperature } = req.query;
+    const data = await send(prompt, parseFloat(temperature));
+    res.json({ data });
+  } catch (error) {
+    next(error);
+  }
 });
 
 app.listen(port, () => {

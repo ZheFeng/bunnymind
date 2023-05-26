@@ -1,29 +1,37 @@
-# bunnymind
+# Bunny Mind
 
-Make AI easier
+Make AI easier!
 
 ![Bunny](/public/bunny.png "Bunny")
 
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Available Scripts
 
-## Getting Started
+In the project directory, you can run:
 
-First, run the development server:
+### `npm run start-server`
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Runs the server\
+Open [http://localhost:3001](http://localhost:3001)
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+### `npm start`
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+Runs the app in the development mode.\
+Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-## Deploy on Vercel
+The page will reload if you make edits.\
+You will also see any lint errors in the console.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+### `npm test`
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Launches the test runner in the interactive watch mode.\
+See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+
+### `npm run build`
+
+Builds the app for production to the `build` folder.\
+It correctly bundles React in production mode and optimizes the build for the best performance.
+
+The build is minified and the filenames include the hashes.\
+Your app is ready to be deployed!
+
+See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
